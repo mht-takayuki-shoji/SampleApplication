@@ -9,6 +9,6 @@
         android:id="@+id/local_push_notification_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ローカル通知" />
+        android:text="FCMtoken" />
 
 </FrameLayout>
