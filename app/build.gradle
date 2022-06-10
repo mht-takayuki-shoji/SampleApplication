@@ -74,5 +74,9 @@ dependencies {
     // Testing Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
+    // kotlinx-coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-rc01")
 
 }

@@ -6,9 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import com.sampleapplication.databinding.FragmentMainBinding
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * A simple [Fragment] subclass.
@@ -40,6 +48,23 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var token: String
+        var testString: String = "test"
+        var testInt: Int = 1
+
+        binding.coroutinesButton.setOnClickListener {
+            runBlocking {
+                launch {
+                    delay(1000)
+                    testInt++
+                    Log.d(TAG, testInt.toString())
+                }
+                Log.d(TAG, testInt.toString())
+
+            }
+            viewLifecycleOwner.lifecycleScope.launch {
+
+            }
+        }
 
         binding.localPushNotificationButton.setOnClickListener {
             Firebase.messaging.token.addOnCompleteListener { task ->
@@ -50,6 +75,7 @@ class MainFragment : Fragment() {
 
                 // Get new FCM registration token
                 token = task.result
+                binding.fcmTokenText.text = token
                 Log.d(TAG, token)
 
             }
@@ -73,5 +99,13 @@ class MainFragment : Fragment() {
             }
 
         private const val TAG = "MainFragment"
+    }
+}
+
+class MyViewModel: ViewModel() {
+    init {
+        viewModelScope.launch {
+
+        }
     }
 }
